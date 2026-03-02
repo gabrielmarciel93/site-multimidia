@@ -14,6 +14,7 @@
     "@tailwindcss/vite": "^4.2.1",
     "gsap": "^3.14.2",
     "lucide-react": "^0.575.0",
+    "puppeteer": "^24.37.5",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
@@ -33,5 +34,18 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0",
     "vite": "^7.3.1"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielmarciel93/site-multimidia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrielmarciel93/site-multimidia/issues"
+  },
+  "homepage": "https://github.com/gabrielmarciel93/site-multimidia#readme"
 }

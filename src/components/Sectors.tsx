@@ -80,7 +80,7 @@ const Sectors = () => {
     }, { scope: container });
 
     return (
-        <section id="sectors" ref={container} className="py-24 px-6 lg:px-20 bg-black/40 min-h-screen border-b border-white/5">
+        <section id="sectors" ref={container} className="scroll-section py-24 px-6 lg:px-20 bg-black/40 min-h-screen border-b border-white/5 flex flex-col justify-center">
             <div className="max-w-7xl mx-auto">
                 <div className="mb-16 text-center reveal-up">
                     <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">As Vertentes da <span className="text-brand-blue">Multimídia</span></h2>

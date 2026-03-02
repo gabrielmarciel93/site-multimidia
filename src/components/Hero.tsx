@@ -30,7 +30,7 @@ const Hero = () => {
     };
 
     return (
-        <section id="hero" ref={container} className="relative min-h-screen pt-32 pb-20 px-6 lg:px-20 overflow-hidden flex flex-col items-center justify-center text-center">
+        <section id="hero" ref={container} className="scroll-section relative min-h-screen pt-32 pb-20 px-6 lg:px-20 overflow-hidden flex flex-col items-center justify-center text-center">
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[var(--color-bg-dark)] to-black/80 -z-10"></div>
 
             {/* Decorative Blur Object */}

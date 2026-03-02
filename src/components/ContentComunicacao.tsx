@@ -140,7 +140,7 @@ const ContentComunicacao = () => {
                         },
                         {
                             num: 12,
-                            title: 'Carlinhos, Ninguém e o Tudo Ao Mesmo Tempo',
+                            title: 'Carlinhos, Ninguém é o Tudo Ao Mesmo Tempo',
                             desc: 'No fim das contas a máxima e os propósitos do trabalho incansável: "Ninguém faz algo grande sozinho, se faz sozinho é porque não é algo grande… Carlitos Paes."',
                             items: [
                                 'Fica cravado nas almas do comunicadores multimídias das igreja atuais as bases de trabalhar como a equipe dos irmãos em cristo. Somar é sempre as chaves da conquista!'

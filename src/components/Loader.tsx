@@ -4,7 +4,7 @@ import { Globe } from 'lucide-react';
 
 const Loader = () => {
     const container = useRef<HTMLDivElement>(null);
-    const globeRef = useRef<SVGSVGElement>(null);
+    const globeRef = useRef<HTMLDivElement>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [progress, setProgress] = useState(0);
 
@@ -80,11 +80,12 @@ const Loader = () => {
             className="fixed inset-0 z-[10000] bg-black flex flex-col items-center justify-center pointer-events-none"
         >
             <div className="relative flex items-center justify-center mb-12">
-                <Globe
-                    ref={globeRef}
-                    size={80}
-                    className="text-brand-blue"
-                />
+                <div ref={globeRef}>
+                    <Globe
+                        size={80}
+                        className="text-brand-blue"
+                    />
+                </div>
             </div>
 
             {/* Tech Progress Container */}

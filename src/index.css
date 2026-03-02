@@ -13,4 +13,15 @@ body {
   color: var(--color-text-primary);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  cursor: none;
+  /* Hide default cursor */
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  cursor: none !important;
+  /* Force hide on interactive elements */
 }

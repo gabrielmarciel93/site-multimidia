@@ -45,7 +45,7 @@ const Footer = () => {
             </div>
 
             <div className="mt-20 text-center text-text-secondary text-sm">
-                <p>© 2026 Multimídia para Igrejas. Todos os direitos reservados.</p>
+                <p>© 2026 <a href="https://www.instagram.com/gabrielmarcieloficial/" target="_blank" rel="Gabriel Marciel">@gabrielmarcieloficial</a>. Todos os direitos reservados.</p>
                 <p className="mt-2 text-xs opacity-50">Construindo comunicação de excelência no Reino.</p>
             </div>
         </footer>

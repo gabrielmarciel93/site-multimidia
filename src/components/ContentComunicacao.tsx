@@ -1,11 +1,18 @@
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import JSConfetti from 'js-confetti';
 
 const ContentComunicacao = () => {
     const container = useRef<HTMLDivElement>(null);
+    const jsConfettiRef = useRef<JSConfetti | null>(null);
 
     useGSAP(() => {
+        // Initialize confetti only once
+        if (!jsConfettiRef.current) {
+            jsConfettiRef.current = new JSConfetti();
+        }
+
         const cards = gsap.utils.toArray('.card-section-com') as HTMLElement[];
 
         cards.forEach((card) => {
@@ -21,6 +28,15 @@ const ContentComunicacao = () => {
                         start: 'top 80%',
                         end: 'top 30%',
                         scrub: 1,
+                        onEnter: () => {
+                            if (card.closest('section')?.id === 'com-11' && jsConfettiRef.current) {
+                                jsConfettiRef.current.addConfetti({
+                                    emojis: ['🎉', '✨', '🎊'],
+                                    emojiSize: 32,
+                                    confettiNumber: 60,
+                                });
+                            }
+                        }
                     }
                 }
             );

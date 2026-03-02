@@ -7,6 +7,7 @@ const Loader = () => {
     const globeRef = useRef<SVGSVGElement>(null);
     const cameraRef = useRef<SVGSVGElement>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
         // Prevent scrolling while loading safely
@@ -27,6 +28,17 @@ const Loader = () => {
             duration: 4,
             repeat: -1,
             ease: 'linear'
+        });
+
+        // Progress counter animation (0 to 100%)
+        const progressObj = { value: 0 };
+        gsap.to(progressObj, {
+            value: 100,
+            duration: 3.3, // Matches the entrance + faux delay time
+            ease: "power2.inOut",
+            onUpdate: () => {
+                setProgress(Math.round(progressObj.value));
+            }
         });
 
         tl.from(globeRef.current, {
@@ -76,7 +88,7 @@ const Loader = () => {
             ref={container}
             className="fixed inset-0 z-[10000] bg-black flex flex-col items-center justify-center pointer-events-none"
         >
-            <div className="relative flex items-center justify-center">
+            <div className="relative flex items-center justify-center mb-12">
                 <Globe
                     ref={globeRef}
                     size={80}
@@ -89,8 +101,21 @@ const Loader = () => {
                 />
             </div>
 
-            <div className="mt-8 text-white/50 text-sm font-medium tracking-[0.2em] uppercase">
-                Aguarde...
+            {/* Tech Progress Container */}
+            <div className="flex flex-col items-center w-64 mt-4 z-10">
+                <div className="flex justify-between w-full mb-2 text-brand-blue text-xs font-mono tracking-widest uppercase">
+                    <span>Sistema</span>
+                    <span>{progress}%</span>
+                </div>
+
+                {/* Progress Bar Track */}
+                <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden relative">
+                    {/* Progress Bar Fill */}
+                    <div
+                        className="h-full bg-brand-blue shadow-[0_0_15px_rgba(19,127,236,0.8)]"
+                        style={{ width: `${progress}%` }}
+                    />
+                </div>
             </div>
 
             {/* Background glow for loader */}

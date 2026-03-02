@@ -1,5 +1,6 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { Globe } from 'lucide-react';
 
 const Loader = () => {
@@ -8,7 +9,7 @@ const Loader = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [progress, setProgress] = useState(0);
 
-    useEffect(() => {
+    useGSAP(() => {
         // Prevent scrolling while loading safely
         document.documentElement.classList.add('overflow-hidden');
         document.body.classList.add('overflow-hidden');
@@ -22,7 +23,7 @@ const Loader = () => {
         });
 
         // Independent infinite animation so it doesn't block the main timeline
-        const spinTween = gsap.to(globeRef.current, {
+        gsap.to(globeRef.current, {
             rotation: "+=360",
             duration: 4,
             repeat: -1,
@@ -40,10 +41,12 @@ const Loader = () => {
             }
         });
 
-        tl.from(globeRef.current, {
+        tl.fromTo(globeRef.current, {
             scale: 0,
-            rotation: -180,
             opacity: 0,
+        }, {
+            scale: 1,
+            opacity: 1,
             duration: 1,
             ease: 'back.out(1.5)'
         })
@@ -63,14 +66,12 @@ const Loader = () => {
                 ease: 'power3.inOut'
             });
 
-        // Cleanup
+        // Cleanup body classes on unmount safely
         return () => {
-            tl.kill();
-            spinTween.kill();
             document.documentElement.classList.remove('overflow-hidden');
             document.body.classList.remove('overflow-hidden');
         };
-    }, []);
+    }, { scope: container });
 
     if (!isLoading) return null;
 

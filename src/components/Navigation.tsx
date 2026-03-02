@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 
-const sections = ['hero', 'sectors', 'transmissao', 'comunicacao', 'footer'];
-
 const Navigation = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [totalSections, setTotalSections] = useState(0);
 
     useEffect(() => {
         const handleScroll = () => {
             const sections = document.querySelectorAll('.scroll-section');
+            if (sections.length > 0) {
+                setTotalSections(sections.length);
+            }
             const currentPos = window.scrollY + window.innerHeight / 2;
             let activeIndex = 0;
 
@@ -50,7 +52,7 @@ const Navigation = () => {
 
             <button
                 onClick={() => scrollTo(currentIndex + 1)}
-                className={`p-3 rounded-full bg-brand-blue/90 border border-white/10 backdrop-blur-md text-white hover:bg-blue-600 transition-all duration-300 shadow-[0_0_20px_rgba(19,127,236,0.6)] ${currentIndex === sections.length - 1 ? 'opacity-0 pointer-events-none -translate-y-4' : 'opacity-100 translate-y-0'}`}
+                className={`p-3 rounded-full bg-brand-blue/90 border border-white/10 backdrop-blur-md text-white hover:bg-blue-600 transition-all duration-300 shadow-[0_0_20px_rgba(19,127,236,0.6)] ${totalSections > 0 && currentIndex >= totalSections - 1 ? 'opacity-0 pointer-events-none -translate-y-4' : 'opacity-100 translate-y-0'}`}
                 aria-label="Próxima Sessão"
                 title="Próxima sessão"
             >

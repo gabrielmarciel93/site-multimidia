@@ -44,19 +44,19 @@ const Navigation = () => {
         <div className="fixed right-6 bottom-10 z-50 flex flex-col gap-3">
             <button
                 onClick={() => scrollTo(currentIndex - 1)}
-                className={`w-14 h-14 flex items-center justify-center rounded-full bg-bg-card/80 border border-white/10 backdrop-blur-md text-brand-blue hover:text-white hover:bg-brand-blue transition-all duration-300 shadow-lg ${currentIndex === 0 ? 'opacity-0 pointer-events-none translate-y-4' : 'opacity-100 translate-y-0'}`}
+                className={`w-14 h-14 flex items-center justify-center rounded-full bg-bg-card/80 border border-white/10 backdrop-blur-md text-brand-blue hover:text-white hover:bg-brand-blue transition-all duration-300 shadow-lg cursor-pointer ${currentIndex === 0 ? 'opacity-0 pointer-events-none translate-y-4' : 'opacity-100 translate-y-0'}`}
                 aria-label="Sessão Anterior"
             >
-                <ChevronUp size={24} />
+                <ChevronUp size={24} className="pointer-events-none" />
             </button>
 
             <button
                 onClick={() => scrollTo(currentIndex + 1)}
-                className={`w-14 h-14 flex items-center justify-center rounded-full bg-brand-blue/90 border border-white/10 backdrop-blur-md text-white hover:bg-blue-600 transition-all duration-300 shadow-[0_0_20px_rgba(19,127,236,0.6)] ${totalSections > 0 && currentIndex >= totalSections - 1 ? 'opacity-0 pointer-events-none -translate-y-4' : 'opacity-100 translate-y-0'}`}
+                className={`w-14 h-14 flex items-center justify-center rounded-full bg-brand-blue/90 border border-white/10 backdrop-blur-md text-white hover:bg-blue-600 transition-all duration-300 shadow-[0_0_20px_rgba(19,127,236,0.6)] cursor-pointer ${totalSections > 0 && currentIndex >= totalSections - 1 ? 'opacity-0 pointer-events-none -translate-y-4' : 'opacity-100 translate-y-0'}`}
                 aria-label="Próxima Sessão"
                 title="Próxima sessão"
             >
-                <ChevronDown size={28} />
+                <ChevronDown size={28} className="pointer-events-none" />
             </button>
         </div>
     );

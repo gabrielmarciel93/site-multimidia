@@ -1,11 +1,10 @@
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
-import { Globe, Camera } from 'lucide-react';
+import { Globe } from 'lucide-react';
 
 const Loader = () => {
     const container = useRef<HTMLDivElement>(null);
     const globeRef = useRef<SVGSVGElement>(null);
-    const cameraRef = useRef<SVGSVGElement>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [progress, setProgress] = useState(0);
 
@@ -48,21 +47,13 @@ const Loader = () => {
             duration: 1,
             ease: 'back.out(1.5)'
         })
-            .from(cameraRef.current, {
-                scale: 0,
-                y: 20,
-                opacity: 0,
-                duration: 0.8,
-                ease: 'back.out(1.2)'
-            }, "-=0.5")
             // Fake loading delay to let user see animation
             .to({}, { duration: 1.5 })
             // Exit animation
-            .to([globeRef.current, cameraRef.current], {
+            .to(globeRef.current, {
                 scale: 0,
                 opacity: 0,
                 duration: 0.5,
-                stagger: 0.1,
                 ease: 'power2.in'
             })
             .to(container.current, {
@@ -92,12 +83,7 @@ const Loader = () => {
                 <Globe
                     ref={globeRef}
                     size={80}
-                    className="text-brand-blue/30 absolute"
-                />
-                <Camera
-                    ref={cameraRef}
-                    size={40}
-                    className="text-white z-10"
+                    className="text-brand-blue"
                 />
             </div>
 

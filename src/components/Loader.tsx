@@ -60,6 +60,7 @@ const Loader = () => {
         // Cleanup
         return () => {
             tl.kill();
+            document.body.style.overflow = ''; // Ensure overflow is always restored on unmount
         };
     }, []);
 

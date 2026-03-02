@@ -8,33 +8,30 @@ const Navigation = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            // Find the currently active section based on scroll position
+            const sections = document.querySelectorAll('.scroll-section');
             const currentPos = window.scrollY + window.innerHeight / 2;
             let activeIndex = 0;
 
-            sections.forEach((id, index) => {
-                const element = document.getElementById(id);
-                if (element) {
-                    // we use some offset to trigger earlier
-                    const offsetTop = element.offsetTop;
-                    if (currentPos >= offsetTop) {
-                        activeIndex = index;
-                    }
+            sections.forEach((element, index) => {
+                const offsetTop = (element as HTMLElement).offsetTop;
+                if (currentPos >= offsetTop) {
+                    activeIndex = index;
                 }
             });
             setCurrentIndex(activeIndex);
         };
 
         window.addEventListener('scroll', handleScroll);
-        // Initial check
-        handleScroll();
+        // Initial check with a small timeout to let React layout finish
+        setTimeout(handleScroll, 100);
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const scrollTo = (index: number) => {
+        const sections = document.querySelectorAll('.scroll-section');
         if (index >= 0 && index < sections.length) {
-            const element = document.getElementById(sections[index]);
+            const element = sections[index] as HTMLElement;
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
             }

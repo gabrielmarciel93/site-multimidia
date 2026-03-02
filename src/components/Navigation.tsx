@@ -44,7 +44,7 @@ const Navigation = () => {
         <div className="fixed right-6 bottom-10 z-50 flex flex-col gap-3">
             <button
                 onClick={() => scrollTo(currentIndex - 1)}
-                className={`w-12 h-12 flex items-center justify-center rounded-full bg-bg-card/80 border border-white/10 backdrop-blur-md text-brand-blue hover:text-white hover:bg-brand-blue transition-all duration-300 shadow-lg ${currentIndex === 0 ? 'opacity-0 pointer-events-none translate-y-4' : 'opacity-100 translate-y-0'}`}
+                className={`w-14 h-14 flex items-center justify-center rounded-full bg-bg-card/80 border border-white/10 backdrop-blur-md text-brand-blue hover:text-white hover:bg-brand-blue transition-all duration-300 shadow-lg ${currentIndex === 0 ? 'opacity-0 pointer-events-none translate-y-4' : 'opacity-100 translate-y-0'}`}
                 aria-label="Sessão Anterior"
             >
                 <ChevronUp size={24} />

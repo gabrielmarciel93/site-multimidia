@@ -27,12 +27,12 @@ const Cursor = () => {
     return (
         <div
             ref={cursorRef}
-            className="fixed top-0 left-0 w-6 h-6 pointer-events-none z-[9999] mix-blend-difference"
+            className="fixed top-0 left-0 w-12 h-12 pointer-events-none z-[9999] mix-blend-difference"
             style={{ transform: 'translate(-50%, -50%)' }}
         >
             <svg
-                width="24"
-                height="24"
+                width="40"
+                height="40"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

@@ -9,14 +9,24 @@ const Loader = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Prevent scrolling while loading
-        document.body.style.overflow = 'hidden';
+        // Prevent scrolling while loading safely
+        document.documentElement.classList.add('overflow-hidden');
+        document.body.classList.add('overflow-hidden');
 
         const tl = gsap.timeline({
             onComplete: () => {
-                document.body.style.overflow = '';
+                document.documentElement.classList.remove('overflow-hidden');
+                document.body.classList.remove('overflow-hidden');
                 setIsLoading(false);
             }
+        });
+
+        // Independent infinite animation so it doesn't block the main timeline
+        const spinTween = gsap.to(globeRef.current, {
+            rotation: "+=360",
+            duration: 4,
+            repeat: -1,
+            ease: 'linear'
         });
 
         tl.from(globeRef.current, {
@@ -33,13 +43,6 @@ const Loader = () => {
                 duration: 0.8,
                 ease: 'back.out(1.2)'
             }, "-=0.5")
-            // small pulsing / rotating animation
-            .to(globeRef.current, {
-                rotation: 360,
-                duration: 2,
-                repeat: -1,
-                ease: 'linear'
-            }, "-=0.8")
             // Fake loading delay to let user see animation
             .to({}, { duration: 1.5 })
             // Exit animation
@@ -60,7 +63,9 @@ const Loader = () => {
         // Cleanup
         return () => {
             tl.kill();
-            document.body.style.overflow = ''; // Ensure overflow is always restored on unmount
+            spinTween.kill();
+            document.documentElement.classList.remove('overflow-hidden');
+            document.body.classList.remove('overflow-hidden');
         };
     }, []);
 

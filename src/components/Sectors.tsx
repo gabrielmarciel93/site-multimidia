@@ -66,60 +66,92 @@ const Sectors = () => {
     const container = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        gsap.from('.sector-item', {
-            scrollTrigger: {
-                trigger: container.current,
-                start: 'top 80%',
-            },
-            y: 50,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: 'power2.out'
+        const cards = gsap.utils.toArray('.card-section-sectors') as HTMLElement[];
+
+        cards.forEach((card) => {
+            gsap.fromTo(card,
+                { scale: 0.8, opacity: 0 },
+                {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 80%',
+                        end: 'top 30%',
+                        scrub: 1,
+                    }
+                }
+            );
         });
     }, { scope: container });
 
     return (
-        <section id="sectors" ref={container} className="scroll-section py-24 px-6 lg:px-20 bg-black/40 min-h-screen border-b border-white/5 flex flex-col justify-center">
-            <div className="max-w-7xl mx-auto">
-                <div className="mb-16 text-center reveal-up">
+        <div ref={container} className="bg-black/40">
+            <section id="sectors" className="scroll-section py-24 px-6 lg:px-20 min-h-screen border-b border-white/5 flex flex-col justify-center">
+                <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">As Vertentes da <span className="text-brand-blue">Multimídia</span></h2>
                     <p className="text-text-secondary max-w-3xl mx-auto text-lg leading-relaxed">
                         A área de Multimídia é responsável por integrar tecnologia e recursos audiovisuais para enriquecer os cultos, melhorar a comunicação e engajar a comunidade. Um setor de multimídia geralmente funciona com as seguintes vertentes:
                     </p>
                 </div>
+            </section>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {sectorsData.map((s) => (
-                        <div key={s.id} className="sector-item bg-bg-card p-6 md:p-8 rounded-2xl border border-white/5 hover:border-brand-blue/50 transition-colors duration-300 flex flex-col gap-4">
-                            <div className="flex items-center gap-4 border-b border-white/5 pb-4">
-                                <div className="w-14 h-14 bg-brand-blue/10 rounded-xl flex items-center justify-center text-brand-blue">
-                                    <s.icon size={28} />
-                                </div>
-                                <h3 className="text-white text-2xl font-bold">{s.id}. {s.title}</h3>
+            {sectorsData.map((s) => (
+                <section key={s.id} id={`sector-${s.id}`} className="scroll-section flex items-center justify-center min-h-screen px-6 py-20 border-b border-white/5 relative overflow-hidden">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-[600px] max-h-[600px] bg-brand-blue/5 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+
+                    <div className="card-section-sectors w-full max-w-4xl bg-bg-card p-8 md:p-16 rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] transform-origin-center">
+                        <div className="flex items-center justify-center gap-6 border-b border-white/10 pb-8 mb-8 flex-col md:flex-row text-center md:text-left">
+                            <div className="w-16 h-16 bg-brand-blue/10 rounded-2xl flex items-center justify-center text-brand-blue shrink-0">
+                                <s.icon size={32} />
                             </div>
+                            <h3 className="text-3xl md:text-5xl font-bold text-white">
+                                <span className="text-brand-blue">{s.id}.</span> {s.title}
+                            </h3>
+                        </div>
+
+                        <div className="space-y-6">
                             <div>
-                                <strong className="text-white">Como funciona:</strong>
-                                <p className="text-text-secondary text-base leading-relaxed mt-1 mb-3">{s.func}</p>
-                                <strong className="text-white">Exemplo de aplicação:</strong>
-                                <p className="text-text-secondary text-base leading-relaxed mt-1">{s.app}</p>
+                                <h4 className="text-white text-xl font-bold mb-2 flex items-center gap-2">
+                                    <div className="w-2 h-2 rounded-full bg-brand-blue"></div>
+                                    Como funciona
+                                </h4>
+                                <p className="text-text-secondary text-lg md:text-xl leading-relaxed">{s.func}</p>
+                            </div>
+
+                            <div className="pt-4">
+                                <h4 className="text-white text-xl font-bold mb-2 flex items-center gap-2">
+                                    <div className="w-2 h-2 rounded-full bg-brand-blue/50"></div>
+                                    Exemplo de aplicação
+                                </h4>
+                                <p className="text-text-secondary text-lg md:text-xl leading-relaxed italic">"{s.app}"</p>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                </section>
+            ))}
 
-                <div className="mt-16 bg-gradient-to-r from-brand-blue/20 to-transparent p-8 rounded-2xl border border-brand-blue/20 sector-item">
-                    <h3 className="text-2xl font-bold text-white mb-4">Integração das Áreas</h3>
-                    <p className="text-text-secondary text-lg leading-relaxed mb-4">
+            <section className="scroll-section flex items-center justify-center min-h-screen px-6 py-20 border-b border-white/5 relative overflow-hidden">
+                <div className="card-section-sectors w-full max-w-4xl bg-gradient-to-br from-bg-card to-[#0d1b2a] p-8 md:p-16 rounded-3xl border border-brand-blue/20 shadow-[0_0_50px_rgba(19,127,236,0.1)] transform-origin-center">
+                    <h3 className="text-3xl md:text-5xl font-bold text-white mb-8 border-b border-white/10 pb-6 text-center">Integração das Áreas</h3>
+                    <p className="text-text-secondary text-lg md:text-xl leading-relaxed mb-8 text-center">
                         Não dá para jogar sozinho no Reino. Todas essas frentes precisam estar orquestradas e rodar em união. Por exemplo:
                     </p>
-                    <ul className="list-disc pl-6 space-y-3 text-text-secondary text-base">
-                        <li>A equipe de <strong className="text-white">Filmagem</strong> grava um testemunho de vida, o <strong className="text-white">Designer</strong> monta uma capa atrativa, o <strong className="text-white">Redator</strong> escreve uma legenda com bons gatilhos, e o <strong className="text-white">Social Media</strong> engaja com a galera que comentar.</li>
-                        <li>Durante o culto, a <strong className="text-white">Galera do Som</strong> afina a mixagem, a <strong className="text-white">Transmissão</strong> puxa o sinal, a <strong className="text-white">Iluminação</strong> traz a atmosfera certa, e a <strong className="text-white">Tecnologia</strong> garante que a internet suporte a maratona. Um verdadeiro corpo em movimento!</li>
+                    <ul className="space-y-6 text-text-secondary text-lg">
+                        <li className="flex gap-4 items-start">
+                            <div className="mt-2 w-2 h-2 rounded-full bg-brand-blue shrink-0"></div>
+                            <span className="leading-relaxed"><strong className="text-white">Na produção:</strong> A equipe de <strong className="text-brand-blue">Filmagem</strong> grava um testemunho de vida, o <strong className="text-brand-blue">Designer</strong> monta uma capa atrativa, o <strong className="text-brand-blue">Redator</strong> escreve uma legenda com bons gatilhos, e o <strong className="text-brand-blue">Social Media</strong> engaja com a galera que comentar.</span>
+                        </li>
+                        <li className="flex gap-4 items-start">
+                            <div className="mt-2 w-2 h-2 rounded-full bg-brand-blue shrink-0"></div>
+                            <span className="leading-relaxed"><strong className="text-white">No culto:</strong> Enquanto a <strong className="text-brand-blue">Galera do Som</strong> afina a mixagem, a <strong className="text-brand-blue">Transmissão</strong> puxa o sinal, a <strong className="text-brand-blue">Iluminação</strong> traz a atmosfera certa, e a <strong className="text-brand-blue">Tecnologia</strong> garante que a internet suporte a maratona. Um verdadeiro corpo em movimento!</span>
+                        </li>
                     </ul>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     );
 };
 
